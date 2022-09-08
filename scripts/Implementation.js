@@ -4,11 +4,11 @@ async function main() {
   
     const [owner, signer1, signer2] = await hre.ethers.getSigners();
 
-    const Bankk = await hre.ethers.getContractFactory("Bank");
-    const bank = await Bankk.deploy();
-    await bank.deployed();
+    const Imp = await hre.ethers.getContractFactory("MultiSigWallet");
+    const imp = await Imp.deploy();
+    await imp.deployed();
 
-    console.log("Bank contract deployed to:", bank.address);
+    console.log("imp contract deployed to:", imp.address);
 }
 
 

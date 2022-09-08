@@ -1,0 +1,23 @@
+## Deployment Address Details 
+
+1. Bank
+- Testnet: 0x8DDCfe8a48Ec2E0666d29908a2A547Ba7D3bb797
+- Mainnet:
+
+2. Implementation contract 
+- Testnet: 0x411E81F1670C9A6a92e0eBA66baf4b9F20174e8A
+- Mainnet: 
+
+3. Factory Contract
+- Testnet: 0x525728DDb14195C02631BF4cACC57eF84658a415
+- Mainnet: 
+
+
+
+<!-- 
+
+0x28Cace20bdfc4E9BE705aB022219385Ba131d9Ee
+0x1f04543B012C0851f23fdfFd824293270a660De9
+0xAC5533077Ec92343A947C2145A29baF6534dF216
+
+ -->
