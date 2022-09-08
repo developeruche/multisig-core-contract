@@ -333,6 +333,17 @@ contract MultiSigWallet is Initializable {
     }
 
 
+    /// @dev this function would return all the transaction
+    function returnTransaction() 
+        public
+        view  
+        onlyOwner
+        returns (
+            Transaction[] memory
+        ) {
+            return transactions;
+        }
+
     /// @dev this is acting as the constructor (because this contract is implemented using the EIP-1167) (this function can only run once and it must be on deployment)
     function initialize(address[] memory _owners, uint256 _numConfirmationsRequired, address _bank) 
         public 

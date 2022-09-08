@@ -4,7 +4,7 @@ async function main() {
   
     const [owner, signer1, signer2] = await hre.ethers.getSigners();
 
-    const IMPLEMENTATION_ADDRESS = "0x411E81F1670C9A6a92e0eBA66baf4b9F20174e8A";
+    const IMPLEMENTATION_ADDRESS = "0xFCc68585A5a33872d4eDf2131fe97D2BDe372a29";
 
     const Factory = await hre.ethers.getContractFactory("WalletFactory");
     const factory = await Factory.deploy(IMPLEMENTATION_ADDRESS);
