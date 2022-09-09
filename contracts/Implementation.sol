@@ -283,7 +283,7 @@ contract MultiSigWallet is Initializable {
     }
 
     /// @dev this is a function to return all the owners in a wallet quorum
-    function getOwners() public view shouldBeInit returns (address[] memory) {
+    function getOwners() public view returns (address[] memory) {
         return owners;
     }
 
@@ -297,8 +297,6 @@ contract MultiSigWallet is Initializable {
     function getTransaction(uint256 _txIndex)
         public
         view
-        shouldBeInit
-        onlyOwner
         returns (
             address to,
             uint256 value,
@@ -323,8 +321,6 @@ contract MultiSigWallet is Initializable {
     function getWalletBalance()
         public
         view
-        shouldBeInit
-        onlyOwner
         returns (
             uint256
         )
@@ -337,7 +333,6 @@ contract MultiSigWallet is Initializable {
     function returnTransaction() 
         public
         view  
-        onlyOwner
         returns (
             Transaction[] memory
         ) {
