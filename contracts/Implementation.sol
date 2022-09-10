@@ -89,6 +89,8 @@ contract MultiSigWallet is Initializable {
     event RevokeConfirmation(address indexed owner, uint256 indexed txIndex);
     /// @dev this would be logged when a transaction is finally excuted
     event ExecuteTransaction(address indexed owner, uint256 indexed txIndex, bytes data);
+    /// @dev this event would be logged when locked funds are moved to the bank
+    event MovedLockedFunds(uint256 whenMoved);
 
 
     //STATE VARIABLES
@@ -189,7 +191,7 @@ contract MultiSigWallet is Initializable {
 
         uint256 txIndex = transactions.length;
 
-        if(msg.value != _value) {
+        if(msg.value != _value * 1 ether) {
             revert InvalidAmountOfEther();
         }
 
@@ -225,7 +227,7 @@ contract MultiSigWallet is Initializable {
     }
 
     /// @dev here the transaction would be excuted
-    /// @notice the transaction can only be excecuted is the number of quorum is satified!!
+    /// @notice the transaction can only be excecuted is the number of quorum is satified!! this transaction would be deleted when excecuted successfully
     /// @param _txIndex: this is the index of the transaction that is to be excecuted
     function executeTransaction(uint256 _txIndex)
         public
@@ -339,6 +341,19 @@ contract MultiSigWallet is Initializable {
             return transactions;
         }
 
+    /// @dev this function would move all the funds locked in this contract to the bank contract 
+    function moveLockedFundsToTheBank() 
+        public
+        shouldBeInit
+        onlyOwner {
+
+            (bool success, ) = payable(bank).call{value: address(this).balance}("");
+
+            require(success, "TransferLock failed");
+            emit MovedLockedFunds(block.timestamp);
+        }
+
+
     /// @dev this is acting as the constructor (because this contract is implemented using the EIP-1167) (this function can only run once and it must be on deployment)
     function initialize(address[] memory _owners, uint256 _numConfirmationsRequired, address _bank) 
         public 
@@ -389,4 +404,4 @@ contract MultiSigWallet is Initializable {
       IBank(bank).deposit{value: msg.value}();
     }
 }
-// ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4","0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db","0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB"]
+// ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4","0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db","0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB"]git 
