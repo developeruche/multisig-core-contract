@@ -191,7 +191,7 @@ contract MultiSigWallet is Initializable {
 
         uint256 txIndex = transactions.length;
 
-        if(msg.value != _value * 1 ether) {
+        if(msg.value != _value) {
             revert InvalidAmountOfEther();
         }
 
@@ -205,6 +205,8 @@ contract MultiSigWallet is Initializable {
                 topic: _topic
             })
         );
+
+        confirmTransaction(txIndex);
 
         emit SubmitTransaction(msg.sender, txIndex, _to, _value, _data, _topic);
     }
@@ -332,7 +334,7 @@ contract MultiSigWallet is Initializable {
 
 
     /// @dev this function would return all the transaction
-    function returnTransaction() 
+    function returnTransactions() 
         public
         view  
         returns (
@@ -404,4 +406,4 @@ contract MultiSigWallet is Initializable {
       IBank(bank).deposit{value: msg.value}();
     }
 }
-// ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4","0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db","0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB"]git 
+// ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4","0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db","0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB"]
