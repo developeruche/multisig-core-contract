@@ -104,8 +104,8 @@ contract Bank is Pausable {
     }
 
     // function to get the balance of ether
-    function getBalance() external view returns(uint) {
-        return balance[msg.sender];
+    function getBalance(address _addr) external view returns(uint) {
+        return balance[_addr];
     }
 
     // function to get theh balance of the contract

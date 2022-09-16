@@ -74,7 +74,7 @@ const { ethers } = require("hardhat");
           let cc = await walletClone.getTransaction(0);
           // console.log("THE WAIT", cc.data);
 
-          expect(cb.data).to.be.equal(cc.data)
+          expect(calldata).to.be.equal(cc.data)
         });
       });
 
@@ -94,20 +94,11 @@ const { ethers } = require("hardhat");
           let cb = await walletClone.submitTransaction(bank.address, etherValue, calldata, "Testing Transaction :)", {value: etherValue});
           cb = await cb.wait();
           cb = cb.events[0].args
-          // console.log("THE CALL", cb.data);
-
-          // obtaining the last transaction
-          let cc = await walletClone.confirmTransaction(0);
-
-          // let ck = await walletClone.confirmTransaction(0);
-
-          // obtaining the last transaction
-          let cd = await walletClone.getTransaction(0);
-          // console.log("THE WAIT", cd.numConfirmations);
 
 
 
-          expect(cd.numConfirmations).to.be.equal(1)
+
+          expect(await walletClone.confirmTransaction(0)).to.be.revertedWithCustomError(walletClone, "YouHaveAlreadyConfirmedThisTransaction");
         });
       });
 
@@ -131,7 +122,6 @@ const { ethers } = require("hardhat");
 
 
           // confirming the last transaction
-          await walletClone.confirmTransaction(0);
           await walletClone.connect(account2).confirmTransaction(0);
           await walletClone.connect(account2).executeTransaction(0);
 
@@ -167,7 +157,6 @@ const { ethers } = require("hardhat");
 
 
           // confirming the last transaction
-          await walletClone.confirmTransaction(0);
           await walletClone.connect(account2).confirmTransaction(0);
           await walletClone.connect(account2).revokeConfirmation(0);
 

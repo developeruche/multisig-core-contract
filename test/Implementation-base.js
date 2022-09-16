@@ -35,7 +35,7 @@ const { ethers } = require("hardhat");
         const { wallet, owner } = await loadFixture(deployWalletContract);
 
         // await wallet.getOwners();
-        await expect(wallet.getOwners()).to.be.revertedWithCustomError(wallet, "HasNotBeenInitialized");
+        await expect(wallet.confirmTransaction(1)).to.be.revertedWithCustomError(wallet, "HasNotBeenInitialized");
       });
 
       it("Should revert with message cannotInit", async function () {
