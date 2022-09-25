@@ -6,11 +6,11 @@ module.exports = {
   solidity: "0.8.9",
    networks: {
      matic: {
-       url: process.env.MAINNET_URL,
+       url: process.env.MAINNET_URL, // RPC URL from QUICKNODE
        accounts: [process.env.PRIVATE_KEY],
      },
      mumbai: {
-       url: process.env.MUMBAI_URL,
+       url: process.env.MUMBAI_URL, // RPC URL FROM QUICKNODE 
          accounts: [process.env.PRIVATE_KEY],
      }
    },
